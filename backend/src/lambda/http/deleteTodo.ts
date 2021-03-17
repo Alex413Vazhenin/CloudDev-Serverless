@@ -12,5 +12,7 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
   const split = authorization.split(' ')
   const jwtToken = split[1]
 
+  await deleteTodo(todoId, jwtToken)
+
   return undefined
 }

@@ -13,5 +13,8 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
   const split = authorization.split(' ')
   const jwtToken = split[1]
   
+  const signedUrl = getUploadUrl(todoId)
+  await updateTodoUrl(todoId, jwtToken)
+
   return undefined
 }
