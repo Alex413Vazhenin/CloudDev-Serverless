@@ -107,7 +107,7 @@ export class TodosAccess {
         }).promise();
     }
 
-    getUploadUrl(todoId: string) {
+    generateUploadUrl(todoId: string) {
         const bucketName = process.env.ATTACHMENTS_S3_BUCKET
         const urlExpiration = process.env.urlExpiration
       

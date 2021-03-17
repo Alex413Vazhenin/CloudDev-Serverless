@@ -1,7 +1,7 @@
 import 'source-map-support/register'
 
 import { APIGatewayProxyEvent, APIGatewayProxyResult, APIGatewayProxyHandler } from 'aws-lambda'
-import { getUploadUrl, updateTodoUrl } from '../../userActions/todos'
+import { generateUploadUrl, updateTodoUrl } from '../../userActions/todos'
 
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
@@ -13,7 +13,7 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
   const split = authorization.split(' ')
   const jwtToken = split[1]
   
-  const signedUrl = getUploadUrl(todoId)
+  const signedUrl = generateUploadUrl(todoId)
   await updateTodoUrl(todoId, jwtToken)
 
   return {

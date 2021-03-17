@@ -55,7 +55,7 @@ export async function deleteTodo(
   })
 }
 
-export async function getUploadUrl(
+export async function generateUploadUrl(
   idToken: string,
   todoId: string
 ): Promise<string> {
