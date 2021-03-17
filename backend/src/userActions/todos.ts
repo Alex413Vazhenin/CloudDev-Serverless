@@ -57,3 +57,10 @@ export function getUploadUrl(todoId) {
     const signedUrl = todosAccess.getUploadUrl(todoId)
     return signedUrl
 }
+
+export async function updateTodoUrl(todoId: string, jwtToken){
+    const userId = parseUserId(jwtToken)
+    return await todosAccess.updateTodoUrl(
+        userId,
+        todoId
+)

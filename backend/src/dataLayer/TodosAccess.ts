@@ -92,7 +92,6 @@ export class TodosAccess {
     }
 
     async deleteTodo (todoId: string, userId:string) {
-    
         const params = {
             TableName: this.todosTable,
             Key:                  
@@ -120,6 +119,26 @@ export class TodosAccess {
         logger.info("Signed URL has been succefully created")
         return signedUrl
       }
+    
+    async updateTodoUrl(userId: string, todoId: string ): Promise<String> {
+      const bucketName = process.env.ATTACHMENTS_S3_BUCKET
+      const attachmentUrl = `https://${bucketName}.s3.amazonaws.com/${todoId}`
+      
+      const params = {
+        TableName: this.todosTable,
+        Key:                  
+          {todoId,
+          userId},
+
+        UpdateExpression: "set #attachmentUrl = :a",
+        ExpressionAttributeValues : {
+          ':a': attachmentUrl
+        },
+        ExpressionAttributeNames:{
+          '#attachmentUrl': 'attachmentUrl'
+        },
+        ReturnValues:"UPDATED_NEW"
+    };
 }
 
 
