@@ -1,10 +1,10 @@
 import * as AWS  from 'aws-sdk'
 process.env._X_AMZN_TRACE_ID = '_X_AMZN_TRACE_ID'
 
-import * as AWSXRay from 'aws-xray-sdk'
 import { DocumentClient } from 'aws-sdk/clients/dynamodb'
 import { UpdateTodoRequest } from '../requests/UpdateTodoRequest'
 
+const AWSXRay = require('aws-xray-sdk')
 const XAWS = AWSXRay.captureAWS(AWS)
 
 import { createLogger } from '../utils/logger'
@@ -139,6 +139,19 @@ export class TodosAccess {
         },
         ReturnValues:"UPDATED_NEW"
     };
+
+    logger.info("URL update in progress", {todoId, userId})
+
+    await this.docClient.update(params, function(err) {
+      if (err) {
+        logger.info("Unable to update an item", {todoId, userId, message: err.message});
+      } else {
+        logger.info("Item update has been successful",{todoId, userId});
+      }
+  }).promise();
+  
+  return 
+  }
 }
 
 
