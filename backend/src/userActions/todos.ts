@@ -6,7 +6,6 @@ import { CreateTodoRequest } from '../requests/CreateTodoRequest'
 import { UpdateTodoRequest } from '../requests/UpdateTodoRequest'
 import { parseUserId } from '../auth/utils'
 
-
 const todosAccess = new TodosAccess()
 
 export async function getAllTodos(jwtToken): Promise<TodoItem[]> {
