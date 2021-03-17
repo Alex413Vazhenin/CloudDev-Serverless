@@ -4,7 +4,6 @@ service:
 plugins:
   - serverless-webpack
   - serverless-iam-roles-per-function
-  - serverless-plugin-tracing
 
 provider:
   name: aws
@@ -19,10 +18,6 @@ provider:
     ATTACHMENTS_S3_BUCKET: sls-udagram-vazhenin-attachments-${self:provider.stage}
     SIGNED_URL_EXPIRATION: 3600
     AUTH_0_JWKS_URL: dev-r82qdi-o.eu.auth0.com/.well-known/jwks.json
-
-  tracing:
-    lambda: true
-    apiGateway: true
 
 custom:
   dynamodb:
