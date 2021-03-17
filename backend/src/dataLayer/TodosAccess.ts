@@ -41,11 +41,31 @@ export class TodosAccess {
 
         await this.docClient.update(params, function(err) {
             if (err) {
-              logger.info("Item update failed. ", {message: err.message});
+              logger.info("Item update failed.", { message: err.message });
             } else {
               logger.info("Item has been sucessfully updated.");
             }
         }).promise();
+
+    return 
+    }
+
+    async deleteTodo (todoId: string, userId:string) {
+    
+        const params = {
+            TableName: this.todosTable,
+            Key:                  
+            { todoId, userId },
+        }
+
+        await this.docClient.delete(params, function(err) {
+            if (err) {
+              logger.info("Unable to delete item.", { todoId, userId, message: err.message });
+            } else {
+              logger.info("Item has been sucessfully deleted");
+            }
+        }).promise();
+    }
 }
 
 
