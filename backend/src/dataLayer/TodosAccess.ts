@@ -2,6 +2,7 @@ import * as AWS  from 'aws-sdk'
 process.env._X_AMZN_TRACE_ID = '_X_AMZN_TRACE_ID'
 
 import * as AWSXRay from 'aws-xray-sdk'
+import { DocumentClient } from 'aws-sdk/clients/dynamodb'
 import { UpdateTodoRequest } from '../requests/UpdateTodoRequest'
 
 const XAWS = AWSXRay.captureAWS(AWS)
@@ -13,6 +14,16 @@ import { TodoItem } from '../models/TodoItem'
 import { S3 } from 'aws-sdk'
 
 export class TodosAccess {
+
+    constructor(
+        private readonly docClient: DocumentClient = new XAWS.DynamoDB.DocumentClient(),
+        private readonly todosTable = process.env.TODOS_TABLE,
+        private readonly indexName = process.env.INDEX_NAME,
+        private readonly s3: S3 =  new XAWS.S3({
+          signatureVersion: 'v4'
+        })) {
+      }
+
     async updateTodo(update: UpdateTodoRequest, userId: string, todoId: string ): Promise<String> {
         const { name,dueDate,done } = update
         const params = {
