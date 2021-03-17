@@ -1,7 +1,7 @@
 import 'source-map-support/register'
 
 import { APIGatewayProxyEvent, APIGatewayProxyResult, APIGatewayProxyHandler } from 'aws-lambda'
-import {deleteTodo} from '../../userActions/todos'
+import { deleteTodo } from '../../userActions/todos'
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   const todoId = event.pathParameters.todoId
@@ -14,5 +14,11 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
 
   await deleteTodo(todoId, jwtToken)
 
-  return undefined
+  return {
+    statusCode: 204,
+    headers: {
+      'access-Control-Allow-Origin': '*'
+    },
+    body: ''
+  }
 }
