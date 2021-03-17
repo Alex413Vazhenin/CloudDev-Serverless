@@ -4,6 +4,7 @@ service:
 plugins:
   - serverless-webpack
   - serverless-iam-roles-per-function
+  - serverless-plugin-tracing
 
 provider:
   name: aws
@@ -11,6 +12,26 @@ provider:
 
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'eu-central-1'}
+
+  environment:
+    TODOS_TABLE: Todos-${self:provider.stage}
+    INDEX_NAME: CREATED_INDEX
+    ATTACHMENTS_S3_BUCKET: sls-udagram-vazhenin-attachments-${self:provider.stage}
+    SIGNED_URL_EXPIRATION: 3600
+    AUTH_0_JWKS_URL: dev-r82qdi-o.eu.auth0.com/.well-known/jwks.json
+
+  tracing:
+    lambda: true
+    apiGateway: true
+
+custom:
+  dynamodb:
+    stages:
+      - ${self:provider.stage}
+    start:
+      inMemory: true
+      migrate: true 
+
 
 functions:
 
