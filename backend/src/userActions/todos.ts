@@ -19,11 +19,9 @@ export async function createTodo(
 ): Promise<TodoItem> {
   
     const todoId = uuid.v4()
-    const userId = parseUserId(jwtToken)
-    
+    const userId = parseUserId(jwtToken)  
     const attachmentUrl = ``
     
-  
     return await todosAccess.createTodo({
       todoId,
       userId,
@@ -45,6 +43,17 @@ return await todosAccess.updateTodo({
     dueDate: updateTodoRequest.dueDate,
     done: updateTodoRequest.done
 },
-    userId, todoId)
-    
+    userId, todoId)    
     }
+export async function deleteTodo(
+    todoId: string, jwtToken: string
+    ) {
+    const userId = parseUserId(jwtToken)
+    
+return await todosAccess.deleteTodo(todoId, userId)
+}
+
+export function getUploadUrl(todoId) {
+    const signedUrl = todosAccess.getUploadUrl(todoId)
+    return signedUrl
+}
