@@ -107,6 +107,19 @@ export class TodosAccess {
             }
         }).promise();
     }
+
+    getUploadUrl(todoId: string) {
+        const bucketName = process.env.ATTACHMENTS_S3_BUCKET
+        const urlExpiration = process.env.urlExpiration
+      
+        const signedUrl = this.s3.getSignedUrl('putObject', {
+          Bucket: bucketName,
+          Key: todoId,
+          Expires: urlExpiration
+        })
+        logger.info("Signed URL has been succefully created")
+        return signedUrl
+      }
 }
 
 
