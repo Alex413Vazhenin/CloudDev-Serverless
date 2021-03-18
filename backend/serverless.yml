@@ -49,10 +49,10 @@ functions:
           auth: Auth
     iamRoleStatements:
       - Effect: Allow
-          Action:
-            - dynamodb:Query
-          Resource:
-            - "*"
+        Action:
+          - dynamodb:Query
+        Resource:
+          - "*"
 
   # CreateTodo
   CreateTodo:
