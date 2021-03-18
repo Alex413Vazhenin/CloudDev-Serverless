@@ -154,7 +154,6 @@ resources:
             AttributeType: S
           - AttributeName: createdAt
             AttributeType: S 
-
         KeySchema:
           - AttributeName: userId
             KeyType: HASH
@@ -175,10 +174,11 @@ resources:
     AttachmentsBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: ${self:provider.environment.ATTACHMENTS_S3_BUCKET}
+        BucketName: ${self:provider.environment.IMAGES_S3_BUCKET}
         CorsConfiguration:
           CorsRules:
-            - AllowedOrigins:
+            -
+              AllowedOrigins:
                 - '*'
               AllowedHeaders:
                 - '*'
@@ -204,5 +204,5 @@ resources:
                   - s3:GetObject
                   - s3:PutObject
                 Resource: 'arn:aws:s3:::${self:provider.environment.ATTACHMENTS_S3_BUCKET}/*'
-          Bucket: !Ref AttachmentBucket
+          Bucket: !Ref AttachmentsBucket
 
