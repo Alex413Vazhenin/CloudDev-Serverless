@@ -173,8 +173,7 @@ resources:
         BucketName: ${self:provider.environment.ATTACHMENTS_S3_BUCKET}
         CorsConfiguration:
           CorsRules:
-            -
-              AllowedOrigins:
+            - AllowedOrigins:
                 - '*'
               AllowedHeaders:
                 - '*'
@@ -200,5 +199,5 @@ resources:
                   - s3:GetObject
                   - s3:PutObject
                 Resource: 'arn:aws:s3:::${self:provider.environment.ATTACHMENTS_S3_BUCKET}/*'
-        Bucket: !Ref AttachmentBucket
+          Bucket: !Ref AttachmentBucket
 
