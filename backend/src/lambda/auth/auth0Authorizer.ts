@@ -61,7 +61,7 @@ let cert
     const res = await Axios.get(jwksUrl);
     const certData = res['data']['keys'][0]['x5c'][0]
     cert = `-----BEGIN CERTIFICATE-----\n${certData}\n-----END CERTIFICATE-----`
-    logger.info('token verified', {messsage: err.message})
+    logger.info('token verified', cert)
   } catch (err) {
     logger.info('could not verify token', {messsage: err.message})
   }
