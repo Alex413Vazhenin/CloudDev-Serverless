@@ -4,6 +4,7 @@ service:
 plugins:
   - serverless-webpack
   - serverless-iam-roles-per-function
+  - serverless-plugin-tracing
 
 provider:
   name: aws
@@ -11,6 +12,10 @@ provider:
 
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'eu-central-1'}
+
+  tracing:
+  lambda: true
+  apiGateway: true
 
   environment:
     TODOS_TABLE: Todos-${self:provider.stage}
