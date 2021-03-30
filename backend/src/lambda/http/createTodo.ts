@@ -14,6 +14,7 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
   const jwtToken = split[1]
 
   const newItem = await createTodo(newTodo, jwtToken)
+  
   return {
     statusCode: 201,
     headers: {
