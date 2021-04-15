@@ -12,14 +12,14 @@
     "middy": "^0.27.1",
     "serverless-plugin-tracing": "^2.0.0",
     "source-map-support": "^0.5.19",
-    "uuid": "^3.4.0",
+    "uuid": "^7.0.3",
     "winston": "^3.3.3"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.72",
     "@types/jsonwebtoken": "^8.5.0",
     "@types/node": "^10.17.55",
-    "aws-sdk": "^2.860.0",
+    "aws-sdk": "^2.887.0",
     "serverless-aws-documentation": "^1.1.0",
     "serverless-dynamodb-local": "^0.2.39",
     "serverless-iam-roles-per-function": "^3.1.1-720dc0f",
